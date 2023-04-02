@@ -7,23 +7,25 @@
         //const int Up = 2;
         const int South = 3;
         const int West = 4;
+        //const int Down = 5;
 
-        const int maxWidth = 4;
-        const int maxLength = 4;
+        const int maxWidth = 5;
+        const int maxLength = 5;
         const int minimumMazeSize = 2;
         public static int Width { get; set; } = 0;
         public static int Length { get; set; } = 0;
 
         public static IDictionary<string, int> TreasureCoordinates { get; set; } = new Dictionary<string, int>();
-        //const int Down = 5;
+        public static IDictionary<string, int> DroneCoordinates { get; set; } = new Dictionary<string, int>();
+
         //void Move(int direction)
         //{
 
         //}
-        //bool IsTreasureRoom()
-        //{ // To be implemented
-
-        //}
+        static bool IsTreasureRoom()
+        {
+            return DroneCoordinates["Length"] == TreasureCoordinates["Length"] && DroneCoordinates["Width"] == TreasureCoordinates["Width"];
+        }
         //bool IsDoorway(int direction)
         //{ // To be implemented
 
@@ -68,7 +70,7 @@
                 {
                     if (i == 0)
                     {
-                        array[i, j].Up = true;
+                        array[i, j].North = true;
                     }
                     if (j == 0)
                     {
@@ -76,7 +78,7 @@
                     }
                     if (i == Length - 1)
                     {
-                        array[i, j].Down = true;
+                        array[i, j].South = true;
                     }
                     if (j == Width - 1)
                     {
@@ -128,11 +130,11 @@
         {
             if (downRoom.Right != null)
             {
-                wall.Down = downRoom.Up;
+                wall.South = downRoom.North;
             }
-            if (wall.Down == null)
+            if (wall.South == null)
             {
-                wall.Down = GenerateBoolean();
+                wall.South = GenerateBoolean();
             }
         }
 
@@ -162,19 +164,19 @@
 
         private static void GenerateUpDoorway(Wall wall, Wall upperRoom)
         {
-            if (upperRoom.Down != null)
+            if (upperRoom.South != null)
             {
-                wall.Up = upperRoom.Down;
+                wall.North = upperRoom.South;
             }
-            if (wall.Up == null)
+            if (wall.North == null)
             {
-                wall.Up = GenerateBoolean();
+                wall.North = GenerateBoolean();
             }
         }
 
         private static bool NoDoorwaysInRoom(Wall wall)
         {
-            return wall.Up == true && wall.Down == true && wall.Left == true
+            return wall.North == true && wall.South == true && wall.Left == true
                  && wall.Right == true;
         }
 
@@ -186,10 +188,14 @@
 
         public static void HideTreasure()
         {
-            int xCoordinate = GenerateRandomNumber(0, Length);
-            int yCoordinate = GenerateRandomNumber(0, Width);
-            TreasureCoordinates.Add("Length", xCoordinate);
-            TreasureCoordinates.Add("Width", yCoordinate);
+            TreasureCoordinates.Add("Length", GenerateRandomNumber(0, Length));
+            TreasureCoordinates.Add("Width", GenerateRandomNumber(0, Width));
+        }
+
+        public static void PlaceDrone()
+        {
+            DroneCoordinates.Add("Length", GenerateRandomNumber(0, Length));
+            DroneCoordinates.Add("Width", GenerateRandomNumber(0, Width));
         }
     }
 }

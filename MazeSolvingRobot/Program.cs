@@ -14,8 +14,8 @@ for (int i = 0; i < AutoDrone.Length; i++)
     {
         Console.WriteLine($"i: {i}");
         Console.WriteLine($"j: {j}");
-        Console.WriteLine($"Up:{array[i,j].Up}");
-        Console.WriteLine($"Down:{array[i, j].Down}");
+        Console.WriteLine($"Up:{array[i,j].North}");
+        Console.WriteLine($"Down:{array[i, j].South}");
         Console.WriteLine($"Left:{array[i, j].Left}");
         Console.WriteLine($"Right:{array[i, j].Right}");
     }
@@ -26,5 +26,10 @@ Console.WriteLine("Hiding treasure in one of the rooms....\r");
 Console.WriteLine("------------------------\n");
 AutoDrone.HideTreasure();
 Console.WriteLine($"Treasure has been hidden at: {AutoDrone.TreasureCoordinates["Length"]}, {AutoDrone.TreasureCoordinates["Width"]}\r");
+Console.WriteLine("------------------------\n");
+Console.WriteLine("Placing the drone in randomly...\r");
+Console.WriteLine("------------------------\n");
+AutoDrone.PlaceDrone();
+Console.WriteLine($"Drone has been placed at: {AutoDrone.DroneCoordinates["Length"]}, {AutoDrone.DroneCoordinates["Width"]}\r");
 Console.WriteLine("------------------------\n");
 Console.ReadKey();
