@@ -8,10 +8,13 @@
         const int South = 3;
         const int West = 4;
 
-        const int maxWidth = 3;
-        const int maxLength = 10;
+        const int maxWidth = 4;
+        const int maxLength = 4;
+        const int minimumMazeSize = 2;
         public static int Width { get; set; } = 0;
         public static int Length { get; set; } = 0;
+
+        public static IDictionary<string, int> TreasureCoordinates { get; set; } = new Dictionary<string, int>();
         //const int Down = 5;
         //void Move(int direction)
         //{
@@ -38,8 +41,8 @@
         }
         public static Wall[,] CreateMazeFrame()
         {
-            int length = GenerateRandomNumber(maxLength);
-            int width = GenerateRandomNumber(maxWidth);
+            int length = GenerateRandomNumber(minimumMazeSize, maxLength);
+            int width = GenerateRandomNumber(minimumMazeSize, maxWidth);
             Wall[,] array = new Wall[length, width];
             Width = width;
             Length = length;
@@ -52,10 +55,10 @@
             }
             return array;
         }
-        public static int GenerateRandomNumber(int maximumValue)
+        public static int GenerateRandomNumber(int minimumValue, int maximumValue)
         {
             Random rnd = new();
-            return rnd.Next(2, maximumValue);
+            return rnd.Next(minimumValue, maximumValue);
         }
         public static void BuildExternalWalls(Wall[,] array)
         {
@@ -65,19 +68,19 @@
                 {
                     if (i == 0)
                     {
-                        array[i, j].Up = WallStatus.True;
+                        array[i, j].Up = true;
                     }
                     if (j == 0)
                     {
-                        array[i, j].Left = WallStatus.True;
+                        array[i, j].Left = true;
                     }
                     if (i == Length - 1)
                     {
-                        array[i, j].Down = WallStatus.True;
+                        array[i, j].Down = true;
                     }
                     if (j == Width - 1)
                     {
-                        array[i, j].Right = WallStatus.True;
+                        array[i, j].Right = true;
                     }
                 }
             }
@@ -123,11 +126,11 @@
 
         private static void GenerateDownDoorway(Wall wall, Wall downRoom)
         {
-            if (downRoom.Right != WallStatus.NotBeenSet)
+            if (downRoom.Right != null)
             {
                 wall.Down = downRoom.Up;
             }
-            if (wall.Down == WallStatus.NotBeenSet)
+            if (wall.Down == null)
             {
                 wall.Down = GenerateBoolean();
             }
@@ -135,11 +138,11 @@
 
         private static void GenerateRightDoorway(Wall wall, Wall rightRoom)
         {
-            if (rightRoom.Right != WallStatus.NotBeenSet)
+            if (rightRoom.Right != null)
             {
                 wall.Right = rightRoom.Left;
             }
-            if (wall.Right == WallStatus.NotBeenSet)
+            if (wall.Right == null)
             {
                 wall.Right = GenerateBoolean();
             }
@@ -147,11 +150,11 @@
 
         private static void GenerateLeftDoorway(Wall wall, Wall leftRoom)
         {
-            if (leftRoom.Right != WallStatus.NotBeenSet)
+            if (leftRoom.Right != null)
             {
                 wall.Left = leftRoom.Right;
             }
-            if (wall.Left == WallStatus.NotBeenSet)
+            if (wall.Left == null)
             {
                 wall.Left = GenerateBoolean();
             }
@@ -159,11 +162,11 @@
 
         private static void GenerateUpDoorway(Wall wall, Wall upperRoom)
         {
-            if (upperRoom.Down != WallStatus.NotBeenSet)
+            if (upperRoom.Down != null)
             {
                 wall.Up = upperRoom.Down;
             }
-            if (wall.Up == WallStatus.NotBeenSet)
+            if (wall.Up == null)
             {
                 wall.Up = GenerateBoolean();
             }
@@ -171,31 +174,22 @@
 
         private static bool NoDoorwaysInRoom(Wall wall)
         {
-            return wall.Up == WallStatus.True && wall.Down == WallStatus.True && wall.Left == WallStatus.True
-                 && wall.Right == WallStatus.True;
+            return wall.Up == true && wall.Down == true && wall.Left == true
+                 && wall.Right == true;
         }
 
-        public static void GenerateRandomWalls(Wall wall)
-        {
-            if (wall.Down == WallStatus.NotBeenSet)
-            {
-                wall.Down = GenerateBoolean();
-            }
-            if (wall.Left == WallStatus.NotBeenSet)
-            {
-                wall.Left = GenerateBoolean();
-            }
-            if (wall.Right == WallStatus.NotBeenSet)
-            {
-                wall.Right = GenerateBoolean();
-            }
-
-        }
-
-        public static WallStatus GenerateBoolean()
+        public static bool GenerateBoolean()
         {
             Random rnd = new();
-            return (WallStatus)rnd.Next(0, 2);
+            return Convert.ToBoolean(rnd.Next(0, 2));
+        }
+
+        public static void HideTreasure()
+        {
+            int xCoordinate = GenerateRandomNumber(0, Length);
+            int yCoordinate = GenerateRandomNumber(0, Width);
+            TreasureCoordinates.Add("Length", xCoordinate);
+            TreasureCoordinates.Add("Width", yCoordinate);
         }
     }
 }

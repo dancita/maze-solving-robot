@@ -2,16 +2,9 @@
 {
     public class Wall
     {
-        public Wall()
-        {
-            Up = WallStatus.NotBeenSet;
-            Left = WallStatus.NotBeenSet;
-            Down = WallStatus.NotBeenSet;
-            Right = WallStatus.NotBeenSet;
-        }
-        public WallStatus Up { get; set; }
-        public WallStatus Left { get; set; }
-        public WallStatus Down { get; set; }
-        public WallStatus Right { get; set; }
+        public bool? Up { get; set; }
+        public bool? Left { get; set; }
+        public bool? Down { get; set; }
+        public bool? Right { get; set; }
     }
 }

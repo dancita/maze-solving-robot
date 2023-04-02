@@ -6,7 +6,7 @@ Console.WriteLine("------------------------\n");
 
 var array = AutoDrone.CreateMaze();
 
-Console.WriteLine("Maze has been created!#\r");
+Console.WriteLine("Maze has been created!\r");
 Console.WriteLine("------------------------\n");
 for (int i = 0; i < AutoDrone.Length; i++)
 {
@@ -20,4 +20,11 @@ for (int i = 0; i < AutoDrone.Length; i++)
         Console.WriteLine($"Right:{array[i, j].Right}");
     }
 }
+Console.WriteLine("------------------------\n");
+
+Console.WriteLine("Hiding treasure in one of the rooms....\r");
+Console.WriteLine("------------------------\n");
+AutoDrone.HideTreasure();
+Console.WriteLine($"Treasure has been hidden at: {AutoDrone.TreasureCoordinates["Length"]}, {AutoDrone.TreasureCoordinates["Width"]}\r");
+Console.WriteLine("------------------------\n");
 Console.ReadKey();
