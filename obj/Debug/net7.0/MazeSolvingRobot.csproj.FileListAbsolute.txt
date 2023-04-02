@@ -1,0 +1,15 @@
+C:\Project\MazeSolvingRobot\bin\Debug\net7.0\MazeSolvingRobot.exe
+C:\Project\MazeSolvingRobot\bin\Debug\net7.0\MazeSolvingRobot.deps.json
+C:\Project\MazeSolvingRobot\bin\Debug\net7.0\MazeSolvingRobot.runtimeconfig.json
+C:\Project\MazeSolvingRobot\bin\Debug\net7.0\MazeSolvingRobot.dll
+C:\Project\MazeSolvingRobot\bin\Debug\net7.0\MazeSolvingRobot.pdb
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\MazeSolvingRobot.csproj.AssemblyReference.cache
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\MazeSolvingRobot.GeneratedMSBuildEditorConfig.editorconfig
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\MazeSolvingRobot.AssemblyInfoInputs.cache
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\MazeSolvingRobot.AssemblyInfo.cs
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\MazeSolvingRobot.csproj.CoreCompileInputs.cache
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\MazeSolvingRobot.dll
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\refint\MazeSolvingRobot.dll
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\MazeSolvingRobot.pdb
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\MazeSolvingRobot.genruntimeconfig.cache
+C:\Project\MazeSolvingRobot\obj\Debug\net7.0\ref\MazeSolvingRobot.dll
