@@ -1,5 +1,5 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using MazeSolvingRobot;
+using MazeSolvingRobot.Models;
 
 Console.WriteLine("Maze solving robot in C#\r");
 Console.WriteLine("------------------------\n");

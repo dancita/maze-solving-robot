@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MazeSolvingRobot
+﻿namespace MazeSolvingRobot.Models
 {
     public class AutoDrone
     {
@@ -13,8 +7,11 @@ namespace MazeSolvingRobot
         //const int Up = 2;
         const int South = 3;
         const int West = 4;
-        public static int Width = 0;
-        public static int Length = 0;
+
+        const int maxWidth = 3;
+        const int maxLength = 10;
+        public static int Width { get; set; } = 0;
+        public static int Length { get; set; } = 0;
         //const int Down = 5;
         //void Move(int direction)
         //{
@@ -36,13 +33,13 @@ namespace MazeSolvingRobot
         {
             var array = CreateMazeFrame();
             BuildExternalWalls(array);
-            BuildInternalWalls(array);           
+            BuildInternalWalls(array);
             return array;
         }
         public static Wall[,] CreateMazeFrame()
         {
-            int length = GenerateRandomNumber();
-            int width = GenerateRandomNumber();
+            int length = GenerateRandomNumber(maxLength);
+            int width = GenerateRandomNumber(maxWidth);
             Wall[,] array = new Wall[length, width];
             Width = width;
             Length = length;
@@ -55,10 +52,10 @@ namespace MazeSolvingRobot
             }
             return array;
         }
-        public static int GenerateRandomNumber()
+        public static int GenerateRandomNumber(int maximumValue)
         {
-            Random rnd = new Random();
-            return rnd.Next(2,2);
+            Random rnd = new();
+            return rnd.Next(2, maximumValue);
         }
         public static void BuildExternalWalls(Wall[,] array)
         {
@@ -78,7 +75,7 @@ namespace MazeSolvingRobot
                     {
                         array[i, j].Down = WallStatus.True;
                     }
-                    if (j == Length - 1)
+                    if (j == Width - 1)
                     {
                         array[i, j].Right = WallStatus.True;
                     }
@@ -95,24 +92,24 @@ namespace MazeSolvingRobot
                     {
                         var upperRoom = i == 0 ? null : array[i - 1, j];
                         if (upperRoom != null)
-                        {                            
+                        {
                             GenerateUpDoorway(array[i, j], upperRoom);
                         }
-                        
+
 
                         var leftRoom = j == 0 ? null : array[i, j - 1];
                         if (leftRoom != null)
                         {
                             GenerateLeftDoorway(array[i, j], leftRoom);
                         }
-                        
 
-                        var rightRoom = j == Length - 1  ? null : array[i, j + 1];
+
+                        var rightRoom = j == Width - 1 ? null : array[i, j + 1];
                         if (rightRoom != null)
                         {
                             GenerateRightDoorway(array[i, j], rightRoom);
                         }
-                        
+
                         var downRoom = i == Length - 1 ? null : array[i + 1, j];
                         if (downRoom != null)
                         {
@@ -180,8 +177,6 @@ namespace MazeSolvingRobot
 
         public static void GenerateRandomWalls(Wall wall)
         {
-
-            
             if (wall.Down == WallStatus.NotBeenSet)
             {
                 wall.Down = GenerateBoolean();
@@ -200,7 +195,7 @@ namespace MazeSolvingRobot
         public static WallStatus GenerateBoolean()
         {
             Random rnd = new();
-            return (WallStatus)rnd.Next(0,2);
+            return (WallStatus)rnd.Next(0, 2);
         }
     }
 }

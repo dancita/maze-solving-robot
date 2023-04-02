@@ -1,4 +1,4 @@
-﻿namespace MazeSolvingRobot
+﻿namespace MazeSolvingRobot.Models
 {
     public enum WallStatus
     {
