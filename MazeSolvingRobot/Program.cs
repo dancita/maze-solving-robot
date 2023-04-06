@@ -32,4 +32,5 @@ Console.WriteLine("------------------------\n");
 AutoDrone.PlaceDrone();
 Console.WriteLine($"Drone has been placed at: {AutoDrone.DroneCoordinates["Length"]}, {AutoDrone.DroneCoordinates["Width"]}\r");
 Console.WriteLine("------------------------\n");
+AutoDrone.FindTreasure(array);
 Console.ReadKey();

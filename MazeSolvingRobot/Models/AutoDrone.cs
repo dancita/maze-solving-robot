@@ -18,10 +18,25 @@
         public static IDictionary<string, int> TreasureCoordinates { get; set; } = new Dictionary<string, int>();
         public static IDictionary<string, int> DroneCoordinates { get; set; } = new Dictionary<string, int>();
 
-        //void Move(int direction)
-        //{
-
-        //}
+        static void Move(int direction)
+        {
+            if (direction == 0)
+            {
+                DroneCoordinates["Length"] = DroneCoordinates["Length"] - 1;
+            }
+            else if (direction == 1)
+            {
+                DroneCoordinates["Width"] = DroneCoordinates["Width"] + 1;
+            }
+            else if (direction == 3)
+            {
+                DroneCoordinates["Length"] = DroneCoordinates["Length"] + 1;
+            }
+            else if (direction == 4)
+            {
+                DroneCoordinates["Width"] = DroneCoordinates["Width"] - 1;
+            }
+        }
         static bool IsTreasureRoom()
         {
             return DroneCoordinates["Length"] == TreasureCoordinates["Length"] && DroneCoordinates["Width"] == TreasureCoordinates["Width"];
@@ -30,10 +45,48 @@
         //{ // To be implemented
 
         //}
-        //FindTreasure()
-        //{ // To be implemented
+        public static void FindTreasure(Wall[,] array)
+        { 
+            while(!IsTreasureRoom())
+            {
+                Console.WriteLine("Treasure is not here! :(\n");
+                Console.WriteLine("Finding the possible directions...\n");
+                var possibleDirections = FindDoorways(array[DroneCoordinates["Length"], DroneCoordinates["Width"]]);
+                Console.WriteLine("Choose a direction random...\n");
+                var randomNumber = GenerateRandomNumber(0, possibleDirections.Count);
+                int directionToMove = possibleDirections[randomNumber];
+                Console.WriteLine($"Direction has been selected: {directionToMove} North = 0, East = 1, South = 3, West = 4...\n");
+                Console.WriteLine($"Let's move!\n");
+                Move(directionToMove);
+                Console.WriteLine($"Drone has been moved! New coordinates: {DroneCoordinates["Length"]},{DroneCoordinates["Width"]}\n");
+                Console.ReadKey();
 
-        //}
+            }
+            Console.WriteLine("Treasure has been found!\n");
+        }
+
+        private static List<int> FindDoorways(Wall droneCoordinates)
+        {
+            List<int> possibleDirections = new();
+            if (droneCoordinates.South == false)
+            {
+                possibleDirections.Add(3);
+            }
+            if (droneCoordinates.Left == false)
+            {
+                possibleDirections.Add(4);
+            }
+            if (droneCoordinates.North == false)
+            {
+                possibleDirections.Add(0);
+            }
+            if (droneCoordinates.Right == false)
+            {
+                possibleDirections.Add(1);
+            }
+            return possibleDirections;
+        }
+
         public static Wall[,] CreateMaze()
         {
             var array = CreateMazeFrame();
