@@ -18,6 +18,8 @@
         public static IDictionary<string, int> TreasureCoordinates { get; set; } = new Dictionary<string, int>();
         public static IDictionary<string, int> DroneCoordinates { get; set; } = new Dictionary<string, int>();
 
+        public static int PreviousDirection { get; set; } = 999;
+
         static void Move(int direction)
         {
             if (direction == 0)
@@ -55,8 +57,13 @@
                 int directionToMove;
                 if (possibleDirections.Count == 1)
                 {
+                    Console.WriteLine($"There's only one way to go without turning back...\n");
+                    directionToMove = possibleDirections[0];                   
+                }
+                else if (possibleDirections.Count == 0)
+                {
                     Console.WriteLine($"Reached a dead end, let's turn back...\n");
-                    directionToMove= possibleDirections[0];
+                    directionToMove = PreviousDirection;
                 }
                 else
                 {
@@ -67,6 +74,7 @@
                 Console.WriteLine($"Direction has been selected: {directionToMove} North = 0, East = 1, South = 3, West = 4...\n");
                 Console.WriteLine($"Let's move!\n");
                 Move(directionToMove);
+                PreviousDirection = directionToMove;
                 Console.WriteLine($"Drone has been moved! New coordinates: {DroneCoordinates["Length"]},{DroneCoordinates["Width"]}\n");
                 Console.ReadKey();
 
@@ -77,19 +85,19 @@
         private static List<int> FindDoorways(Wall droneCoordinates)
         {
             List<int> possibleDirections = new();
-            if (droneCoordinates.South == false)
+            if (PreviousDirection != 3 && droneCoordinates.South == false)
             {
                 possibleDirections.Add(3);
             }
-            if (droneCoordinates.Left == false)
+            if (PreviousDirection != 4 && droneCoordinates.Left == false)
             {
                 possibleDirections.Add(4);
             }
-            if (droneCoordinates.North == false)
+            if (PreviousDirection != 0 && droneCoordinates.North == false)
             {
                 possibleDirections.Add(0);
             }
-            if (droneCoordinates.Right == false)
+            if (PreviousDirection != 1 && droneCoordinates.Right == false)
             {
                 possibleDirections.Add(1);
             }
