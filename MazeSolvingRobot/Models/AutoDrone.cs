@@ -52,9 +52,18 @@
                 Console.WriteLine("Treasure is not here! :(\n");
                 Console.WriteLine("Finding the possible directions...\n");
                 var possibleDirections = FindDoorways(array[DroneCoordinates["Length"], DroneCoordinates["Width"]]);
-                Console.WriteLine("Choose a direction random...\n");
-                var randomNumber = GenerateRandomNumber(0, possibleDirections.Count);
-                int directionToMove = possibleDirections[randomNumber];
+                int directionToMove;
+                if (possibleDirections.Count == 1)
+                {
+                    Console.WriteLine($"Reached a dead end, let's turn back...\n");
+                    directionToMove= possibleDirections[0];
+                }
+                else
+                {
+                    Console.WriteLine("Choosing a random direction...\n");
+                    var randomNumber = GenerateRandomNumber(0, possibleDirections.Count);
+                    directionToMove = possibleDirections[randomNumber];
+                }
                 Console.WriteLine($"Direction has been selected: {directionToMove} North = 0, East = 1, South = 3, West = 4...\n");
                 Console.WriteLine($"Let's move!\n");
                 Move(directionToMove);
