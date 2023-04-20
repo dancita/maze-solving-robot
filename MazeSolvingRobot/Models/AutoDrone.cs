@@ -18,6 +18,8 @@
         public static IDictionary<string, int> TreasureCoordinates { get; set; } = new Dictionary<string, int>();
         public static IDictionary<string, int> DroneCoordinates { get; set; } = new Dictionary<string, int>();
 
+        public static List<Coordinates> Log { get; set; } = new List<Coordinates>();
+
         public static int PreviousDirection { get; set; } = 999;
 
         static void Move(int direction)
@@ -38,6 +40,7 @@
             {
                 DroneCoordinates["Width"] = DroneCoordinates["Width"] - 1;
             }
+            Log.Add(new Coordinates(DroneCoordinates["Length"], DroneCoordinates["Width"] ));
         }
         static bool IsTreasureRoom()
         {
@@ -76,6 +79,10 @@
                 Move(directionToMove);
                 PreviousDirection = directionToMove;
                 Console.WriteLine($"Drone has been moved! New coordinates: {DroneCoordinates["Length"]},{DroneCoordinates["Width"]}\n");
+                foreach (var item in Log)
+                {
+                    Console.WriteLine($"Log: [{item.Length}{item.Width}]");
+                }
                 Console.ReadKey();
 
             }
