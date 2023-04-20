@@ -40,8 +40,14 @@
             {
                 DroneCoordinates["Width"] = DroneCoordinates["Width"] - 1;
             }
-            Log.Add(new Coordinates(DroneCoordinates["Length"], DroneCoordinates["Width"] ));
+            LoggingDronesCurrentLocation(DroneCoordinates["Length"], DroneCoordinates["Width"]);
         }
+
+        public static void LoggingDronesCurrentLocation(int length, int width)
+        {
+            Log.Add(new Coordinates(length, width));
+        }
+
         static bool IsTreasureRoom()
         {
             return DroneCoordinates["Length"] == TreasureCoordinates["Length"] && DroneCoordinates["Width"] == TreasureCoordinates["Width"];
