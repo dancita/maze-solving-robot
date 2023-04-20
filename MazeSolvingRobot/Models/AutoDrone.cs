@@ -15,7 +15,7 @@
         public static int Width { get; set; } = 0;
         public static int Length { get; set; } = 0;
 
-        public static IDictionary<string, int> TreasureCoordinates { get; set; } = new Dictionary<string, int>();
+        public static Coordinates TreasureCoordinates { get; set; } = new Coordinates();
         public static IDictionary<string, int> DroneCoordinates { get; set; } = new Dictionary<string, int>();
 
         public static List<Coordinates> Log { get; set; } = new List<Coordinates>();
@@ -50,7 +50,7 @@
 
         static bool IsTreasureRoom()
         {
-            return DroneCoordinates["Length"] == TreasureCoordinates["Length"] && DroneCoordinates["Width"] == TreasureCoordinates["Width"];
+            return DroneCoordinates["Length"] == TreasureCoordinates.Length && DroneCoordinates["Width"] == TreasureCoordinates.Width;
         }
         //bool IsDoorway(int direction)
         //{ // To be implemented
@@ -87,7 +87,7 @@
                 Console.WriteLine($"Drone has been moved! New coordinates: {DroneCoordinates["Length"]},{DroneCoordinates["Width"]}\n");
                 foreach (var item in Log)
                 {
-                    Console.WriteLine($"Log: [{item.Length}{item.Width}]");
+                    Console.WriteLine($"Log: [{item.Length}, {item.Width}]");
                 }
                 Console.ReadKey();
 
@@ -271,8 +271,8 @@
 
         public static void HideTreasure()
         {
-            TreasureCoordinates.Add("Length", GenerateRandomNumber(0, Length));
-            TreasureCoordinates.Add("Width", GenerateRandomNumber(0, Width));
+            TreasureCoordinates.Length = GenerateRandomNumber(0, Length);
+            TreasureCoordinates.Width = GenerateRandomNumber(0, Width);
         }
 
         public static void PlaceDrone()

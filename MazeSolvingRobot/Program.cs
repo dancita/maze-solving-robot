@@ -25,7 +25,7 @@ Console.WriteLine("------------------------\n");
 Console.WriteLine("Hiding treasure in one of the rooms....\r");
 Console.WriteLine("------------------------\n");
 AutoDrone.HideTreasure();
-Console.WriteLine($"Treasure has been hidden at: {AutoDrone.TreasureCoordinates["Length"]}, {AutoDrone.TreasureCoordinates["Width"]}\r");
+Console.WriteLine($"Treasure has been hidden at: {AutoDrone.TreasureCoordinates.Length}, {AutoDrone.TreasureCoordinates.Width}\r");
 Console.WriteLine("------------------------\n");
 Console.WriteLine("Placing the drone in randomly...\r");
 Console.WriteLine("------------------------\n");
